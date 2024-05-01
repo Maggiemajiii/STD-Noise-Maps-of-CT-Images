@@ -1,2 +1,3 @@
-scans
-
+/scans
+/RatUNet/testresults/*
+/RatUNet/__pycache__/*
