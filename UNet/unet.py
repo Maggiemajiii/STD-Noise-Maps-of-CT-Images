@@ -1,10 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
+import torch
+from torch import nn
+import torch.nn.functional as F
 
-# In[1]:
-
-
-class DoubleConv(nn.Module): # 2d convolutional process
+class DoubleConv(nn.Module):
     
     def __init__(self, in_channels, out_channels, mid_channels = None, dropout_rate=0.0):
         super().__init__()
@@ -39,7 +37,7 @@ class Down(nn.Module): # downsampling (encoder) layer
         return self.maxpool_conv(x)
 
     
-class Up(nn.Module): # upsampling (decoder) layer
+class Up(nn.Module):
     def __init__(self, in_channels, out_channels, bilinear=True):
         super().__init__()
 
@@ -71,11 +69,7 @@ class OutConv(nn.Module):
 
     def forward(self, x):
         return self.conv(x)
-
-
-# In[ ]:
-
-
+    
 class UNet(nn.Module):
     
     ''' UNet class to call the model. Initialize with number of in channels and number of classes.
@@ -101,15 +95,15 @@ class UNet(nn.Module):
         self.outc = (OutConv(64, n_classes))
 
     def forward(self, x): # forward propagation
-        x1 = self.inc(x) # 64
-        x2 = self.down1(x1) # 128
-        x3 = self.down2(x2) # 256
-        x4 = self.down3(x3) # 512
-        x5 = self.down4(x4) # 1024
-        x = self.up1(x5, x4) # 1024
-        x = self.up2(x, x3) # 512
-        x = self.up3(x, x2) # 256
-        x = self.up4(x, x1) # 128
-        logits = self.outc(x) # 64
+        x1 = self.inc(x)
+        x2 = self.down1(x1)
+        x3 = self.down2(x2)
+        x4 = self.down3(x3)
+        x5 = self.down4(x4)
+        x = self.up1(x5, x4)
+        x = self.up2(x, x3)
+        x = self.up3(x, x2)
+        x = self.up4(x, x1)
+        logits = self.outc(x)
         return logits
-
+    

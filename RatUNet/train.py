@@ -1,4 +1,4 @@
-from model import *
+from ratunet import *
 from dataprocess import *
 import os
 import nrrd

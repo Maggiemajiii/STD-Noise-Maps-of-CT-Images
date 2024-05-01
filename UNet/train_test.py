@@ -1,4 +1,4 @@
-from ratunet import *
+from unet import *
 from dataprocess import *
 import os
 import nrrd
@@ -66,9 +66,9 @@ def main():
     # devise for Mac
     device = torch.device("mps")
     #model = RatUNet(BasicBlock, 64).to(device)
-    model = RatUNet(BasicBlock, num_features=64, dropout_rate=0.0).to(device)
-
-    optimizer = optim.Adam(model.parameters(), lr=0.00001)
+    model = UNet(n_channels = 1, n_classes = 1).to(device)
+    optimizer = optim.Adam(model.parameters(), lr = 0.0001)
+    
     #optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0001)
     #criterion = nn.MSELoss()
     #criterion = nn.L1Loss()
@@ -76,8 +76,8 @@ def main():
 
     # Train the model
     total_step = len(train_loader)
-    #num_epochs = 300
-    num_epochs = 2 # for testing environment
+    num_epochs = 300
+    #num_epochs = 2 # for testing environment
     best_val_loss = float('inf')  # Initialize best validation loss for model saving
 
     # training and validation
