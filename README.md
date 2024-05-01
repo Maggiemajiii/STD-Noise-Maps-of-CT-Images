@@ -8,22 +8,24 @@ The goal of this project is to develop a deep learning model that can accurately
 - Caiwei Zhang
 - Long Chen
 
-#### Files in the Repository
-1. **UNet_final.ipynb**
-2. **RatUNet_final.ipynb** - ThisJupyter notebook containing all code necessary for constructing the RatUNet architecture, processing data, and evaluating the model's performance.
+#### Folders in the Repository
+1. **UNet** - Contains all the .py files needed to execute the UNet architecture
+2. **RatUNet** - Contains all the .py files needed to execute the RatUNet architecture
 
 #### Installation
-To run both projects, you need to install the necessary Python packages. You can install these packages using pip:
+To run both UNet and RatUNet, you need to install the necessary Python packages. You can install these packages using pip in the terminal/command prompt or in an interactive environment like Jupyter Notebooks:
 
 ```bash
-pip install numpy matplotlib torch torchvision
+pip install numpy matplotlib torch torchvision pynrrd SimpleITK patchify
 ```
+We personally suggest using an interactive environment. 
 
 #### How to Run the Project
 To reproduce the results:
 1. **Prepare the Environment**: Ensure all required packages are installed.
-2. **Data Processing**: Follow the procedures in Sections 1-4 of the notebook for data preprocessing using the UNet structure.
-3. **Model Training and Testing**:
-   - Execute the notebook from beginning to end to process the data, train the RatUNet model, and evaluate its performance.
-   - Adjust parameters as necessary in the notebook to tweak model performance.
+2. **Imports**: Run UNet/imports.py first before beginning any code execution (applies to both UNet and RatUNet)
+3. **Data Loading**: custom_dataset.py is designed to be initialized with the directory of interest containing all the images necessary. The images must be stored in this example format:
+   'L056_signal.nrrd', 'L056_noise.nrrd', 'L056_std.nrrd'. If the images are not in this expected naming convention or format, the custom_dataset.py must be modified to load and process 
+   the files as per the desired naming convention. 
+4. **Model Training and Testing**:
 
