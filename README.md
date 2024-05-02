@@ -50,7 +50,7 @@ This function calculates the average relative error between model outputs and ta
 
 This function prints important information about data loading, such as the total number of samples, number of batches, and batch sizes. This functionality is vital for ensuring data is correctly loaded and batch-processed, aiding in debugging and optimizing the data loading process.
 
-The proper implementation and application of these tools and functions are indispensable for ensuring the effectiveness and efficiency of model training. They serve as a bridge in the project codebase, ensuring precision in data handling and accuracy in model evaluation.
+The proper implementation and application of these tools and functions ensure the effectiveness and efficiency of model training.
 
 #### **Data Loading**: 
 
