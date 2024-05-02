@@ -77,13 +77,17 @@ An essential part of our data handling framework, this subclass of `torch.utils.
 
 ##### UNet 
 
-To train the [U-Net model](https://arxiv.org/abs/1505.04597), navigate to the `UNet` directory containing `train_test.py` and run. This script will train the U-Net model using the training data loaded via `DataLoader`. This model is set default to run on CUDA device, by changing that label according to your platform can you run this model on your device.
+To train the [U-Net model](https://arxiv.org/abs/1505.04597) , run `python3 ./UNet/train_test.py`. 
+
+This script will train the U-Net model using the training data loaded via `DataLoader`. This model is set default to run on CUDA device, by changing that label according to your platform can you run this model on your device.
 
 [Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.0001` is set as default training optimizer for UNet.
 
 ##### RatUNet
 
-To train the [RatUNet model](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9138094/), navigate to the `RatUNet` containing `train_test.py` and run. This script will train the RatUNet model with `DataLoader`prepares the data. 
+To train the [RatUNet model](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9138094/),  run `python3 ./RatUNet/train_test.py`
+
+This script will train the RatUNet model with `DataLoader`prepares the data. 
 
 The RatUNet model, a variant of the UNet architecture enhanced with  residual blocks and attention mechanism. The model is set default to run on an MPS device, by changing that label according to your platform can you run this model on your device.
 
