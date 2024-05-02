@@ -79,7 +79,9 @@ An essential part of our data handling framework, this subclass of `torch.utils.
 
 To train the [U-Net model](https://arxiv.org/abs/1505.04597) , run 
 
-`python3 ./UNet/train_test.py`. 
+```
+python3 ./UNet/train_test.py
+```
 
 This script will train the U-Net model using the training data loaded via `DataLoader`. This model is set default to run on CUDA device, by changing that label according to your platform can you run this model on your device.
 
@@ -89,7 +91,9 @@ This script will train the U-Net model using the training data loaded via `DataL
 
 To train the [RatUNet model](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9138094/),  run 
 
-`python3 ./RatUNet/train_test.py`
+```
+python3 ./RatUNet/train_test.py
+```
 
 This script will train the RatUNet model with `DataLoader`prepares the data. 
 
