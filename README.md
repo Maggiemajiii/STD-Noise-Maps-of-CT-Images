@@ -85,13 +85,13 @@ To train the [U-Net model](https://arxiv.org/abs/1505.04597), navigate to the `U
 
 To train the [RatUNet model](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9138094/), navigate to the `RatUNet` containing `train_test.py` and run. This script will train the RatUNet model with `DataLoader`prepares the data. 
 
-The RatUNet model, a variant of the UNet architecture enhanced with  features like Residual Blocks and attention mechanism. The model is set default to run on an MPS device, by changing that label according to your platform can you run this model on your device.
+The RatUNet model, a variant of the UNet architecture enhanced with  residual blocks and attention mechanism. The model is set default to run on an MPS device, by changing that label according to your platform can you run this model on your device.
 
 [Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.00001` is set as default training optimizer for UNet.
 
 #### Training and Validation
 
-- It reads medical images in NRRD format from a specified directory, checking their dimensions, sizes, and shapes to ensure uniformity, which is crucial for consistent processing.
+- It reads medical images in NRRD format from a specified directory, checking their dimensions, sizes, and shapes to ensure uniformity, which is crucial for processing.
 - A custom dataset object (`CustomData`) is created, splitting the dataset into training, validation, and test subsets which are then loaded using PyTorch’s `DataLoader` for efficient batch processing during model training.
 
 This script will load the trained model and test it against your  test dataset. It will output the performance metrics defined in your  testing script, such as Average Relative Error or any other metric you  have defined.
