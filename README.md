@@ -11,9 +11,11 @@ The goal of this project is to develop a deep learning model that can accurately
 - Long Chen
 
 ## Folders in the Repository
-1. **UNet** - Contains all the .py files needed to execute the UNet architecture
-2. **RatUNet** - Contains all the .py files needed to execute the RatUNet architecture
-3. **notebooks** - Contains Jupyter Notebook for both models
+**UNet** - Contains all the .py files needed to execute the UNet architecture
+
+**RatUNet** - Contains all the .py files needed to execute the RatUNet architecture
+
+**notebooks** - Contains Jupyter Notebook for both models
 
 
 
@@ -77,11 +79,15 @@ An essential part of our data handling framework, this subclass of `torch.utils.
 
 To train the [U-Net model](https://arxiv.org/abs/1505.04597), navigate to the `UNet` directory containing `train_test.py` and run. This script will train the U-Net model using the training data loaded via `DataLoader`. This model is set default to run on CUDA device, by changing that label according to your platform can you run this model on your device.
 
+[Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.0001` is set as default training optimizer for UNet.
+
 ##### RatUNet
 
 To train the [RatUNet model](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9138094/), navigate to the `RatUNet` containing `train_test.py` and run. This script will train the RatUNet model with `DataLoader`prepares the data. 
 
-The RatUNet model, a variant of the UNet architecture enhanced with  features like BasicBlocks and dropout for robust feature learning, is  initialized.  The model is set default to run on an MPS device, by changing that label according to your platform can you run this model on your device.
+The RatUNet model, a variant of the UNet architecture enhanced with  features like Residual Blocks and attention mechanism. The model is set default to run on an MPS device, by changing that label according to your platform can you run this model on your device.
+
+[Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.00001` is set as default training optimizer for UNet.
 
 #### Training and Validation
 
