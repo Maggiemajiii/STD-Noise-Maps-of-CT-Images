@@ -65,23 +65,19 @@ def main():
     # device = "cuda" if torch.cuda.is_available() else "cpu"
     # devise for Mac
     device = torch.device("mps")
-    #model = RatUNet(BasicBlock, 64).to(device)
     model = RatUNet(BasicBlock, num_features=64, dropout_rate=0.0).to(device)
 
     optimizer = optim.Adam(model.parameters(), lr=0.00001)
-    #optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0001)
-    #criterion = nn.MSELoss()
-    #criterion = nn.L1Loss()
+
     model_saving_path = './testresults/RatUNet_test_nodr.pth'
 
     # Train the model
     total_step = len(train_loader)
     num_epochs = 300
     #num_epochs = 2 # for testing environment
-    best_val_loss = float('inf')  # Initialize best validation loss for model saving
-
+    best_val_loss = float('inf')  
+    
     # training and validation
-
     train_losses = []
     val_losses = []
 
@@ -95,11 +91,10 @@ def main():
             img = img.unsqueeze(0)
             std_map = images['std_map'].float().to(device)
             std_map = std_map.unsqueeze(0)
-            #print(img.shape)
-            #print(std_map.shape)
+
             optimizer.zero_grad()
             y_pred = model(img)
-            #print(y_pred.shape)
+
             loss = average_relative_error(y_pred, std_map)
             #loss = criterion(y_pred, std_map)
             loss.backward()
@@ -111,7 +106,7 @@ def main():
         train_losses.append(epoch_loss)
 
         # Validation phase
-        model.eval()  # Set model to evaluation mode
+        model.eval() 
         with torch.no_grad():
             for idx, image in enumerate(tqdm(val_loader)):
                 img = image['ct_generated'].float().to(device)
@@ -142,7 +137,6 @@ def main():
     plt.title('Training and Validation Losses - without dropout')
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
-    #plt.xticks(range(0, len(train_losses), 1))  # Specify tick locations every 5 epochs
     plt.legend()
     plt.show()
 
