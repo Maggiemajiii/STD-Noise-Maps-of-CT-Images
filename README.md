@@ -1,7 +1,7 @@
 # Standard Deviation Noise Maps of CT Scans using UNet and UNet-based Architectures
 
 ## Project Description
-The goal of this project is to develop a deep learning model that can accurately estimate the standard deviation (STD) map of noise in CT scans. STD noise map is a per-pixel way to describe noise intensity and feature properties for finetuned maneuver of de-noising filters . We implemented a UNet model and a UNet-based model in order to predict STD noise map from noisy CT scans.
+The goal of this project is to develop a deep learning model that can accurately estimate the standard deviation (STD) map of noise in CT scans. STD noise map is a per-pixel way to describe noise intensity and feature properties for finetuned maneuver of de-noising filters. We implemented a UNet model and a UNet-based model in order to predict STD noise maps from noisy CT scans.
 
 ## [Report](https://docs.google.com/document/d/1-uR0x-wku4VW0EU8N3Qm_44w2j1H_wEN_QM9PRKqIlY/edit?usp=sharing)
 
@@ -22,7 +22,7 @@ The goal of this project is to develop a deep learning model that can accurately
 ## How to Run the Project
 To reproduce the results:
 
-#### **Prepare the Environment**: 
+### **Prepare the Environment**: 
 
 Ensure all required packages are installed.
 
@@ -73,26 +73,26 @@ An essential part of our data handling framework, this subclass of `torch.utils.
 - `data_info`: Provides detailed insights into the data items, including their shapes and data types, which is vital for debugging and ensuring data integrity.
 - `plot_ct`: A visualization utility that plots patches of CT images alongside their corresponding noise maps, allowing for immediate visual assessment of the preprocessing steps.
 
-#### Models:
+## Models:
 
-##### UNet 
+### UNet 
 
 To train the [U-Net model](https://arxiv.org/abs/1505.04597) , run 
 
 ```
-python3 ./UNet/train_test.py
+python3 ./UNet/train_and_test.py
 ```
 
 This script will train the U-Net model using the training data loaded via `DataLoader`. This model is set default to run on CUDA device, by changing that label according to your platform can you run this model on your device.
 
-[Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.0001` is set as default training optimizer for UNet.
+[Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.0001` is set as the default training optimizer for UNet.
 
-##### RatUNet
+#### RatUNet
 
 To train the [RatUNet model](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9138094/),  run 
 
 ```
-python3 ./RatUNet/train_test.py
+python3 ./RatUNet/train_and_test.py
 ```
 
 This script will train the RatUNet model with `DataLoader`prepares the data. 
@@ -101,26 +101,24 @@ The RatUNet model, a variant of the UNet architecture enhanced with  residual bl
 
 [Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.00001` is set as default training optimizer for UNet.
 
-#### Training and Validation
+## Training and Validation
 
-- It reads medical images in NRRD format from a specified directory, checking their dimensions, sizes, and shapes to ensure uniformity, which is crucial for processing.
-- A custom dataset object (`CustomData`) is created, splitting the dataset into training, validation, and test subsets which are then loaded using PyTorch’s `DataLoader` for efficient batch processing during model training.
-
-This script will load the trained model and test it against your  test dataset. It will output the performance metrics defined in your  testing script, such as Average Relative Error or any other metric you  have defined.
-
-Use script `train.py` in both directories  to perform The model undergoes training over a specified number of epochs, where in each epoch:
+Use script `train.py` in both directories to perform The model undergoes training over a specified number of epochs, where in each epoch:
 
 - The model processes batches of CT images, computes a loss (here, the average relative error between the predictions and the actual STD maps), and updates the model weights accordingly.
 - The script also evaluates the model on the validation dataset after each training epoch to monitor its performance on unseen data. If the validation loss improves, the model state is saved, facilitating model performance tracking and recovery.
 - After training, the script plots training and validation losses across  epochs, providing visual feedback on the learning process and model convergence.
 
-#### **Results Visualization**
+Remember to change the data directory in `train.py` or `train_and_test.py` to where the data is located: 
+```
+data_dir = 'path/to/scans'
+```
 
-Use script `train_and_test.py` to train, visualize and compare the predicted result and ground truth.
+### **Prediction Visualization**
 
-- The model undergoes training for a set number of epochs. In each epoch, the model processes batches of data, computes the loss (using a custom function for average relative error), and updates its weights.
-- It concurrently validates its performance on a separate dataset to monitor effectiveness on unseen data. Improvements in validation loss trigger the saving of the model state.
+Use script `train_and_test.py` to train, visualize, and compare the predicted result and ground truth.
 
-- After training, the model would be evaluated on a test dataset where final predictions are compared against true data. The results are visualized to demonstrate the model's capability in predicting noise maps from medical images.
-- The script plots the training and validation losses to provide insights into the learning progress and model convergence over the epochs.
+- The file undergoes the same training process as `train.py`
+- After training, the model would be evaluated on a test dataset where final predictions are compared against true data. The results are visualized to demonstrate the model's capability to predict noise maps from medical images.
+
 
