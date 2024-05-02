@@ -65,16 +65,11 @@ def main():
     # device = "cuda" if torch.cuda.is_available() else "cpu"
     # devise for Mac
     device = torch.device("mps")
-    #model = RatUNet(BasicBlock, 64).to(device)
-    model = UNet(n_channels = 1, n_classes = 1).to(device)
+    model = UNet(n_channels = 1, n_classes = 1, dropout_rate=0.0).to(device)
     optimizer = optim.Adam(model.parameters(), lr = 0.0001)
-    #optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0001)
-    #criterion = nn.MSELoss()
-    #criterion = nn.L1Loss()
+
     model_saving_path = './testresults/UNet_test_nodr.pth'
 
-    # Train the model
-    total_step = len(train_loader)
     num_epochs = 300
     #num_epochs = 2 # for testing environment
     best_val_loss = float('inf')  # Initialize best validation loss for model saving
@@ -94,13 +89,11 @@ def main():
             img = img.unsqueeze(0)
             std_map = images['std_map'].float().to(device)
             std_map = std_map.unsqueeze(0)
-            #print(img.shape)
-            #print(std_map.shape)
+
             optimizer.zero_grad()
             y_pred = model(img)
-            #print(y_pred.shape)
+
             loss = average_relative_error(y_pred, std_map)
-            #loss = criterion(y_pred, std_map)
             loss.backward()
             optimizer.step()
 
@@ -141,7 +134,6 @@ def main():
     plt.title('Training and Validation Losses - without dropout')
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
-    #plt.xticks(range(0, len(train_losses), 1))  # Specify tick locations every 5 epochs
     plt.legend()
     plt.show()
 

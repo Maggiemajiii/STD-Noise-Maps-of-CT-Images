@@ -1,3 +1,5 @@
 /scans
 /RatUNet/testresults/*
 /RatUNet/__pycache__/*
+/UNet/testresults/*
+/UNet/__pycache__/*
