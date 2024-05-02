@@ -54,7 +54,7 @@ The proper implementation and application of these tools and functions are indis
 
 #### **Data Loading**: 
 
-The `dataprocess.py` script is designed to handle data loading. Initialize this script with the directory containing your CT images. Your data directory should contain images in the following format:
+The `dataprocess.py` script is designed to handle data loading. Your data directory should contain images in the following format:
 
 - `L056_signal.nrrd`
 - `L056_noise.nrrd`
@@ -87,7 +87,7 @@ This script will train the U-Net model using the training data loaded via `DataL
 
 [Adam optimizer](https://pytorch.org/docs/stable/generated/torch.optim.Adam.html) with `learning_rate = 0.0001` is set as the default training optimizer for UNet.
 
-#### RatUNet
+### RatUNet
 
 To train the [RatUNet model](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9138094/),  run 
 
